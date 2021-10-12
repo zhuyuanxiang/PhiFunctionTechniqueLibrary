@@ -1,11 +1,11 @@
 from .BasicPhiFunction import *
-from ..Objects.Polygon import *
 from ..Objects.CustomObject import *
+
 
 class CPPhiFunction(BasicPhiFunction):
 
-    def __init__(self,A,B):
-        BasicPhiFunction.__init__(self,A,B,'CP')
+    def __init__(self, A, B):
+        BasicPhiFunction.__init__(self, A, B, 'CP')
         if (A.ObjectName == 'Circle') & (B.ObjectName == 'Polygon'):
             self.C = A
             self.P = B
@@ -23,11 +23,12 @@ class CPPhiFunction(BasicPhiFunction):
         for i in range(self.P.Vertices.shape[0]):
             self.chi[i] = self.P.Curves[i](self.C.Origin) - self.C.R
             self.omg[i] = self.C.Outline(self.P.Vertices[i])
-            self.psi[i] = (self.P.Coefs[i-1,1] - self.P.Coefs[i,1]) * (self.C.Origin[0] - self.P.Vertices[i,0]) - \
-                          (self.P.Coefs[i-1,0] - self.P.Coefs[i,0]) * (self.C.Origin[1] - self.P.Vertices[i,1]) + \
-                          self.C.R * (self.P.Coefs[i-1,0] * self.P.Coefs[i,1] - self.P.Coefs[i,0] * self.P.Coefs[i-1,1])
+            self.psi[i] = (self.P.Coefs[i - 1, 1] - self.P.Coefs[i, 1]) * (self.C.Origin[0] - self.P.Vertices[i, 0]) - \
+                          (self.P.Coefs[i - 1, 0] - self.P.Coefs[i, 0]) * (self.C.Origin[1] - self.P.Vertices[i, 1]) + \
+                          self.C.R * (self.P.Coefs[i - 1, 0] * self.P.Coefs[i, 1] - self.P.Coefs[i, 0] * self.P.Coefs[
+                i - 1, 1])
         self.Value = np.max([
-            self.chi,
-            np.min([self.omg,self.psi],axis=0)
+                self.chi,
+                np.min([self.omg, self.psi], axis=0)
         ])
         return self.Value
