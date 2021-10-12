@@ -1,4 +1,7 @@
 class PhiFunction:
+    """所有函数的公共基类
+
+    """
 
     def __init__(self, A, B, func_type=''):
         for obj in [A, B]:

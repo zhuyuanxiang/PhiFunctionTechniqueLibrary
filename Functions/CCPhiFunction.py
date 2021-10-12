@@ -2,6 +2,7 @@ from .BasicPhiFunction import *
 
 
 class CCPhiFunction(BasicPhiFunction):
+    """圆与圆的Phi函数计算"""
 
     def __init__(self, A, B):
         if (A.ObjectName != 'Circle') | (B.ObjectName != 'Circle'):

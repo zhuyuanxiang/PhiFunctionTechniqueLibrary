@@ -3,6 +3,7 @@ from ..Objects.CustomObject import *
 
 
 class CPPhiFunction(BasicPhiFunction):
+    """圆与多边形之间的Phi函数"""
 
     def __init__(self, A, B):
         BasicPhiFunction.__init__(self, A, B, 'CP')

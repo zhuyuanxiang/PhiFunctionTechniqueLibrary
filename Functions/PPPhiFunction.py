@@ -3,6 +3,7 @@ import numpy as np
 
 
 class PPPhiFunction(BasicPhiFunction):
+    """多边形与多边形之间的Phi函数"""
 
     def __init__(self, A, B):
         if (A.ObjectName != 'Polygon') | (B.ObjectName != 'Polygon'):
