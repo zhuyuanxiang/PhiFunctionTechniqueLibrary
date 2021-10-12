@@ -9,7 +9,7 @@ class Rectangle(Polygon):
                  origin,
                  width,
                  height,
-                 rot=0,
+                 rotation=0,
                  inv=False):
         self.Width = width
         self.Height = height
@@ -18,7 +18,7 @@ class Rectangle(Polygon):
                              self.Origin + (0, height),
                              self.Origin + (width, height),
                              self.Origin + (width, 0)])
-        Polygon.__init__(self, vertices, rot, inv)
+        Polygon.__init__(self, vertices, rotation, inv)
 
     def SetMetrices(self, width, height):
         self.Width = width

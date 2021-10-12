@@ -1,5 +1,3 @@
-import numpy as np
-
 from .BaseObject import *
 
 
@@ -7,17 +5,18 @@ class Polygon(BaseObject):  # Convex one
 
     def __init__(self,
                  vertices,
-                 rot=0,
+                 rotation=0,
                  inv=False):
-        BaseObject.__init__(self, vertices[0], rot, 'Polygon', inv)
+        BaseObject.__init__(self, vertices[0], rotation, 'Polygon', inv)
         self.Vertices = np.array(vertices, dtype='float64')
-        if rot != 0:
-            self.Rotate(rot)
+        if rotation != 0:
+            self.Rotate(rotation)
         self.Coefs = np.zeros([len(vertices), 3], dtype='float64')
         self.UpdateCoefs()
-        self.Curves = [lambda u, i=i:  # With normilized signed distance
-                       (self.Coefs[i, 0] * u[0] + self.Coefs[i, 1] * u[1] + \
-                        self.Coefs[i, 2]) * self.sgn
+        self.Curves = [lambda u, i=i:  # With normalized signed distance
+                       (self.Coefs[i, 0] * u[0]
+                        + self.Coefs[i, 1] * u[1]
+                        + self.Coefs[i, 2]) * self.sgn
                        for i in range(-1, len(vertices) - 1)]
 
     def _Outline1d(self, u):
@@ -50,8 +49,8 @@ class Polygon(BaseObject):  # Convex one
         for i in range(-1, len(self.Vertices) - 1):
             Ai = self.Vertices[i, 1] - self.Vertices[i + 1, 1]
             Bi = self.Vertices[i + 1, 0] - self.Vertices[i, 0]
-            Ci = self.Vertices[i, 0] * self.Vertices[i + 1, 1] - \
-                 self.Vertices[i + 1, 0] * self.Vertices[i, 1]
+            Ci = (self.Vertices[i, 0] * self.Vertices[i + 1, 1] -
+                  self.Vertices[i + 1, 0] * self.Vertices[i, 1])
             norm = np.linalg.norm([Ai, Bi])
             self.Coefs[i, 0] = Ai / norm
             self.Coefs[i, 1] = Bi / norm

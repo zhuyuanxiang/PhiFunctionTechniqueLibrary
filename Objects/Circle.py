@@ -24,12 +24,6 @@ class Circle(BaseObject):
         self.Origin += delta
 
     def Rotate(self, teta, pol=None):
-        """
-
-        :param teta: 旋转的角度
-        :param pol:
-        :return:
-        """
         if pol is None:
             return
         rot_matrix = np.array([[np.cos(teta), np.sin(teta)],

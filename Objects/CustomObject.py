@@ -2,14 +2,17 @@ from .PhiObject import *
 
 
 class CustomObject(PhiObject):
+    """除了圆形、多边形、矩形之外的自定义形状
+    ToDo：未曾使用
+    """
 
     def __init__(self,
                  origin,
-                 rot=0,
+                 rotation=0,
                  inv=False,
                  objects=[],
                  operator=''):
-        PhiObject.__init__(self, origin, rot, 'CustomObject', inv)
+        PhiObject.__init__(self, origin, rotation, 'CustomObject', inv)
         self.Operator = None
         if (len(objects) == 0) & (len(operator) == 0):
             pass
@@ -33,6 +36,8 @@ must be defined or none of them')
             return np.max([obj.Outline(u) for obj in self.Objects])
 
     def Translate(self, dest=None, delta=None):
+        """
+        """
         if (dest is None) == (delta is None):
             raise ValueError('Only one of \'delta\' or \'dest\' must be defined')
         elif dest is not None:
